@@ -1,7 +1,7 @@
 * remove existing configuration
 
 
-`rm .vimrc && rm -rf .vim`
+`rm -rf .vimrc  .vim`
 
 * downloading this configuration
   
