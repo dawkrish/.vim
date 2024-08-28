@@ -6,6 +6,7 @@ set expandtab
 set smartindent 
 set wildmenu
 set cursorline
+set hidden
 set path+=**
 set clipboard+=unnamed 
 set termguicolors
@@ -69,6 +70,7 @@ nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
 "nnoremap <leader>b :Buffers<Cr>
 
 imap <c-space> <Plug>(asyncomplete_force_refresh)
+inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
