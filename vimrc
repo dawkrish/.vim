@@ -1,4 +1,3 @@
-set nocompatible
 set scrolloff=8
 set nu
 set tabstop=4 softtabstop=4
@@ -13,6 +12,11 @@ set termguicolors
 filetype plugin on
 syntax on
 
+if !filereadable(expand('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
 call plug#begin("~/.vim/plugged")
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'junegunn/fzf.vim'
@@ -25,6 +29,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
+set background=dark
 colo everforest
 
 function! s:on_lsp_buffer_enabled() abort
@@ -58,7 +63,7 @@ let g:lsp_document_highlight_enabled = 0
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
 nnoremap <leader>pq :q<CR>
-nnoremap <leader><CR> :so ~/.vimrc<CR>
+nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
 "nnoremap <leader>f :Files<Cr>
 "nnoremap <leader>b :Buffers<Cr>
 
