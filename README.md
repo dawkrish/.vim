@@ -1,6 +1,6 @@
 * remove existing configuration
 
-
+`cd ~`
 `rm -rf .vimrc  .vim`
 
 * downloading this configuration
