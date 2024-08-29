@@ -33,7 +33,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
 set background=dark
-colo everforest
+"colo everforest
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
