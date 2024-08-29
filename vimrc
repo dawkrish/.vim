@@ -1,7 +1,8 @@
 set scrolloff=8
 set nu
-set tabstop=4 softtabstop=4
-set shiftwidth=4
+set laststatus=2
+set tabstop=2 softtabstop=2
+set shiftwidth=2
 set expandtab
 set smartindent 
 set wildmenu
@@ -38,16 +39,23 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gs <plug>(lsp-document-symbol-search)
-    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-    nmap <buffer> gr <plug>(lsp-references)
     nmap <buffer> gi <plug>(lsp-implementation)
     nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> K <plug>(lsp-hover)
+
+    nmap <buffer> ga <plug>(lsp-code-action-preview)
+    nmap <buffer> S <plug>(lsp-document-format)
+    nmap <buffer> gy <plug>(lsp-document-diagonistics)
+
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+
     nmap <buffer> <leader>rn <plug>(lsp-rename)
+
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-    nmap <buffer> S <plug>(lsp-document-format)
+    
     nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
     nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
@@ -61,11 +69,13 @@ augroup lsp_install
 augroup END
 
 let g:lsp_document_highlight_enabled = 0
+let g:asyncomplete_auto_popup = 0
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
 nnoremap <leader>pq :q<CR>
 nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
+nnoremap % ggVG
 "nnoremap <leader>f :Files<Cr>
 "nnoremap <leader>b :Buffers<Cr>
 
