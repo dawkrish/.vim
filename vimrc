@@ -23,7 +23,6 @@ endif
 call plug#begin("~/.vim/plugged")
 "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 "Plug 'junegunn/fzf.vim'
-Plug 'sainnhe/everforest'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
@@ -33,7 +32,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 call plug#end()
 
 set background=dark
-"colo everforest
+colo zaibatsu
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -69,7 +68,8 @@ augroup lsp_install
 augroup END
 
 let g:lsp_document_highlight_enabled = 0
-let g:asyncomplete_auto_popup = 0
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_min_chars = 2
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
@@ -80,9 +80,9 @@ nnoremap % ggVG
 "nnoremap <leader>b :Buffers<Cr>
 
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
+
+"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
