@@ -11,7 +11,8 @@ set hidden
 set path+=**
 set clipboard+=unnamed 
 set termguicolors
-filetype plugin on
+set backspace=indent,eol,start
+filetype plugin indent on
 syntax on
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -21,68 +22,31 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin("~/.vim/plugged")
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
 
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'dense-analysis/ale'
 call plug#end()
 
 set background=dark
-colo zaibatsu
+colo habamax
 
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> K <plug>(lsp-hover)
+" autocmd InsertEnter * call deoplete#enable()
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_virtualtext_cursor = 'current'
 
-    nmap <buffer> ga <plug>(lsp-code-action-preview)
-    nmap <buffer> S <plug>(lsp-document-format)
-    nmap <buffer> gy <plug>(lsp-document-diagonistics)
 
-    nmap <buffer> gs <plug>(lsp-document-symbol-search)
-    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-    
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
-
-    let g:lsp_format_sync_timeout = 1000
-    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-endfunction
-
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-let g:lsp_document_highlight_enabled = 0
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_min_chars = 2
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
 nnoremap <leader>pq :q<CR>
 nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
 nnoremap % ggVG
-"nnoremap <leader>f :Files<Cr>
-"nnoremap <leader>b :Buffers<Cr>
-
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
-
-"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+nnoremap <leader>f :Files<Cr>
+nnoremap <leader>b :Buffers<Cr>
 
