@@ -58,7 +58,7 @@ function! s:on_lsp_buffer_enabled() abort
     nmap <buffer> <leader>rn <plug>(lsp-rename)
     nmap <buffer> <leader>s <plug>(lsp-document-format)
     nmap <buffer> ga <plug>(lsp-code-action)
-    nmap <buffer> <leader>t plug(lsp-document-diagnostic)
+    nmap <buffer> <leader>d <plug>(lsp-document-diagnostics)
     nmap <buffer> [g <plug>(lsp-previous-diagnostic)
     nmap <buffer> ]g <plug>(lsp-next-diagnostic)
     nmap <buffer> K <plug>(lsp-hover)
@@ -74,7 +74,11 @@ augroup END
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
-
+let g:lsp_document_highlight_enabled = 0
+"" let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_diagnostics_virtual_text_prefix = ">> "
+let g:lsp_inlay_hints_enabled = 1
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
