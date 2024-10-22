@@ -15,6 +15,9 @@ set backspace=indent,eol,start
 filetype plugin indent on
 syntax on
 
+let g:netrw_winsize = 30
+let g:netrw_banner = 0
+
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
   silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -24,9 +27,10 @@ endif
 call plug#begin("~/.vim/plugged")
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-
 Plug 'tpope/vim-commentary'
+
 Plug 'vim-airline/vim-airline'
+Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
@@ -38,6 +42,8 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
+set background=dark
+colo PaperColor
 
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -69,8 +75,6 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
 
-set background=dark
-colo desert
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
@@ -79,4 +83,3 @@ nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
 nnoremap % ggVG
 nnoremap <leader>f :Files<Cr>
 nnoremap <leader>b :Buffers<Cr>
-
