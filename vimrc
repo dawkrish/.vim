@@ -27,9 +27,11 @@ endif
 call plug#begin("~/.vim/plugged")
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'rhysd/vim-healthcheck'
 Plug 'tpope/vim-commentary'
 
 Plug 'vim-airline/vim-airline'
+Plug 'sts10/vim-pink-moon'
 Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'prabirshrestha/vim-lsp'
@@ -46,8 +48,12 @@ set background=dark
 colo PaperColor
 
 function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
+      setlocal omnifunc=lsp#complete
+      setlocal signcolumn=yes
+      set foldmethod=expr
+        \ foldexpr=lsp#ui#vim#folding#foldexpr()
+        \ foldtext=lsp#ui#vim#folding#foldtext()
+
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
     nmap <buffer> gs <plug>(lsp-document-symbol-search)
@@ -74,11 +80,14 @@ augroup END
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr>"
-let g:lsp_document_highlight_enabled = 0
+
+let g:lsp_document_highlight_enabled = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_semantic_enabled = 1
 "" let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_diagnostics_virtual_text_prefix = ">> "
 let g:lsp_inlay_hints_enabled = 1
+
 
 let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
