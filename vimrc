@@ -50,9 +50,6 @@ colo PaperColor
 function! s:on_lsp_buffer_enabled() abort
       setlocal omnifunc=lsp#complete
       setlocal signcolumn=yes
-      set foldmethod=expr
-        \ foldexpr=lsp#ui#vim#folding#foldexpr()
-        \ foldtext=lsp#ui#vim#folding#foldtext()
 
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
     nmap <buffer> gd <plug>(lsp-definition)
