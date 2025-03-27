@@ -12,11 +12,14 @@ set path+=**
 set clipboard+=unnamed 
 set termguicolors
 set backspace=indent,eol,start
-filetype plugin indent on
+filetype plugin on
 syntax on
 
 let g:netrw_winsize = 30
 let g:netrw_banner = 0
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -31,21 +34,25 @@ Plug 'rhysd/vim-healthcheck'
 Plug 'tpope/vim-commentary'
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'sts10/vim-pink-moon'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
 
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/vim-vsnip-integ'
+" Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
+colo desert
 set background=dark
-colo PaperColor
+colorscheme solarized
 
 function! s:on_lsp_buffer_enabled() abort
       setlocal omnifunc=lsp#complete
@@ -80,10 +87,10 @@ inoremap <expr> <cr> pumvisible() ? asyncomplete#close_popup() . "\<cr>" : "\<cr
 
 let g:lsp_document_highlight_enabled = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:lsp_semantic_enabled = 1
+let g:lsp_semantic_enabled = 0
 "" let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_inlay_hints_enabled = 1
+let g:lsp_inlay_hints_enabled =0
 
 
 let mapleader = " "
