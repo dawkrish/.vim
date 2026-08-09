@@ -1,3 +1,4 @@
+let mapleader = " "
 set scrolloff=8
 set nu
 set laststatus=2
@@ -12,6 +13,13 @@ set path+=**
 set clipboard+=unnamed 
 set termguicolors
 set backspace=indent,eol,start
+set undofile
+set undodir=~/.vim/undodir
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set autoread
 filetype plugin on
 syntax on
 
@@ -32,6 +40,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'rhysd/vim-healthcheck'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -50,9 +60,8 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Plug 'rafamadriz/friendly-snippets'
 call plug#end()
 
-colo desert
-set background=dark
-colorscheme solarized
+colorscheme PaperColor 
+set background=light
 
 function! s:on_lsp_buffer_enabled() abort
       setlocal omnifunc=lsp#complete
@@ -93,10 +102,9 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_inlay_hints_enabled =0
 
 
-let mapleader = " "
 nnoremap <leader>pv :Vex<CR>
 nnoremap <leader>pq :q<CR>
 nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
-nnoremap % ggVG
+nnoremap <leader>a ggVG
 nnoremap <leader>f :Files<Cr>
 nnoremap <leader>b :Buffers<Cr>
