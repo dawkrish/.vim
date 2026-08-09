@@ -18,6 +18,9 @@ set termguicolors        " enable 24-bit colors
 set backspace=indent,eol,start  " backspace works everywhere in insert mode
 set undofile             " persistent undo across sessions
 set undodir=~/.vim/undodir
+if !isdirectory(expand('~/.vim/undodir'))
+  call mkdir(expand('~/.vim/undodir'), 'p')
+endif
 set autoread             " reload files changed outside vim
 
 " --- Search ---
