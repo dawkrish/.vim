@@ -95,21 +95,26 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal signcolumn=yes
 
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)             " go to definition
-    nmap <buffer> gs <plug>(lsp-document-symbol-search) " search symbols in file
-    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)" search symbols in project
-    nmap <buffer> gr <plug>(lsp-references)             " find all references
-    nmap <buffer> gi <plug>(lsp-implementation)         " go to implementation
-    nmap <buffer> gt <plug>(lsp-type-definition)        " go to type definition
-    nmap <buffer> <leader>rn <plug>(lsp-rename)         " rename symbol
-    nmap <buffer> <leader>s <plug>(lsp-document-format) " format file
-    nmap <buffer> ga <plug>(lsp-code-action)            " show code actions
-    nmap <buffer> <leader>d <plug>(lsp-document-diagnostics) " show all diagnostics
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic)    " jump to prev diagnostic
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic)        " jump to next diagnostic
-    nmap <buffer> K <plug>(lsp-hover)                   " show hover docs
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)        " scroll hover/popup down
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)        " scroll hover/popup up
+    " navigation
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    " search symbols
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    " actions
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> <leader>s <plug>(lsp-document-format)
+    nmap <buffer> ga <plug>(lsp-code-action)
+    " diagnostics
+    nmap <buffer> <leader>d <plug>(lsp-document-diagnostics)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    " hover and scroll
+    nmap <buffer> K <plug>(lsp-hover)
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 endfunction
 
 augroup lsp_install
@@ -130,9 +135,11 @@ let g:lsp_diagnostics_echo_cursor = 1      " show diagnostic in command line
 let g:lsp_inlay_hints_enabled = 0
 
 " --- Custom keymaps ---
-nnoremap <leader>pv :Vex<CR>        " open file explorer in vertical split
-nnoremap <leader>pq :q<CR>          " quick quit
-nnoremap <leader><CR> :so ~/.vim/vimrc<CR>  " reload vimrc
-nnoremap <leader>a ggVG             " select all
-nnoremap <leader>f :Files<Cr>       " fuzzy find files
-nnoremap <leader>b :Buffers<Cr>     " fuzzy find buffers
+" file explorer, quit, reload vimrc
+nnoremap <leader>pv :Vex<CR>
+nnoremap <leader>pq :q<CR>
+nnoremap <leader><CR> :so ~/.vim/vimrc<CR>
+" select all, fuzzy find
+nnoremap <leader>a ggVG
+nnoremap <leader>f :Files<Cr>
+nnoremap <leader>b :Buffers<Cr>
