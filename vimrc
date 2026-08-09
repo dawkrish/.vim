@@ -61,6 +61,8 @@ Plug 'tpope/vim-commentary'   " gcc to toggle comments
 Plug 'tpope/vim-surround'     " cs'" to change surrounding quotes
 Plug 'tpope/vim-repeat'       " make surround/commentary dot-repeatable
 Plug 'jiangmiao/auto-pairs'   " auto-close brackets and quotes
+Plug 'tpope/vim-fugitive'     " git commands inside vim (:Git blame, :Git diff)
+Plug 'airblade/vim-gitgutter' " show git diff markers in sign column
 
 " status bar
 Plug 'vim-airline/vim-airline'
@@ -93,21 +95,21 @@ function! s:on_lsp_buffer_enabled() abort
     setlocal signcolumn=yes
 
     if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gs <plug>(lsp-document-symbol-search)
-    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer> <leader>s <plug>(lsp-document-format)
-    nmap <buffer> ga <plug>(lsp-code-action)
-    nmap <buffer> <leader>d <plug>(lsp-document-diagnostics)
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+    nmap <buffer> gd <plug>(lsp-definition)             " go to definition
+    nmap <buffer> gs <plug>(lsp-document-symbol-search) " search symbols in file
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)" search symbols in project
+    nmap <buffer> gr <plug>(lsp-references)             " find all references
+    nmap <buffer> gi <plug>(lsp-implementation)         " go to implementation
+    nmap <buffer> gt <plug>(lsp-type-definition)        " go to type definition
+    nmap <buffer> <leader>rn <plug>(lsp-rename)         " rename symbol
+    nmap <buffer> <leader>s <plug>(lsp-document-format) " format file
+    nmap <buffer> ga <plug>(lsp-code-action)            " show code actions
+    nmap <buffer> <leader>d <plug>(lsp-document-diagnostics) " show all diagnostics
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)    " jump to prev diagnostic
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)        " jump to next diagnostic
+    nmap <buffer> K <plug>(lsp-hover)                   " show hover docs
+    nnoremap <buffer> <expr><c-f> lsp#scroll(+4)        " scroll hover/popup down
+    nnoremap <buffer> <expr><c-d> lsp#scroll(-4)        " scroll hover/popup up
 endfunction
 
 augroup lsp_install
